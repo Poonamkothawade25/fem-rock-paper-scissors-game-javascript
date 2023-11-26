@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+      <img src="images/logo.svg" alt="">
+      <div class="scoreboard">
+        <p class="text">Score</p>
+        <h1 id="score">12</h1>
+      </div>
+  </header>
+  <main>
+
+    <div class="heading hideElements" id="title">
+      <h2 class="h2">You picked</h2>
+      <h2 class="h2">The house picked</h2>
+    </div>
+    
+    <img src="images/bg-triangle.svg" alt="background triangle" class="bg-triangle" id="triangle-img">
+    <div class="outer-circle paper userChoice" id="paper">
+      <div class="inner-circle" id="paper-1">
+        <img src="images/icon-paper.svg" alt="Paper" id="paper-2">
+      </div>
+    </div>
+    <div class="outer-circle scissor userChoice" id="scissor">
+      <div class="inner-circle" id="scissor-1">
+        <img src="images/icon-scissors.svg" alt="Scissors" id="scissor-2">
+      </div>
+    </div>
+    <div class="outer-circle rock userChoice" id="rock">
+      <div class="inner-circle" id="rock-1">
+        <img src="images/icon-rock.svg" alt="Rock" id="rock-2">
+      </div>
+    </div>
+
+    <div class="results" id="Results">
+      <h2 class="result" id="Result"></h2>
+      <button class="text" id="playAgain">Play Again</button>
+    </div>
+
+  </main>
+  <footer>
+    <button class="rules">Rules</button>
+  </footer>
+
+
+  
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div> -->
+</body>
+</html>

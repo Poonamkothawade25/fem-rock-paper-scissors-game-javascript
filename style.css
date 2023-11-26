@@ -1,0 +1,425 @@
+/* RESETS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* UTILITIES */
+
+:root {
+
+    /* Colors */
+
+    /* Primary */
+
+    --paper_gradient_1: hsl(230, 89%, 62%);
+    --paper_gradient_2: hsl(230, 89%, 65%);
+    --scissor_gradient_1: hsl(39, 89%, 49%);
+    --scissor_gradient_2: hsl(40, 84%, 53%);
+    --rock_gradient_1:hsl(349, 71%, 52%);
+    --rock_gradient_2:hsl(349, 70%, 56%);
+
+    /* Neutral */
+
+    --Dark-Text: hsl(229, 25%, 31%);
+    --Score-Text: hsl(229, 64%, 46%);
+    --Header-Outline: hsl(217, 16%, 45%);
+
+    --White: hsl(0, 0%, 100%);
+
+    /* Background */
+
+    --bg-radial-gradient-1: hsl(214, 47%, 23%);
+    --bg-radial-gradient-2: hsl(237, 49%, 15%);
+
+    /* Fonts */
+
+    --Semibold: 600;
+    --bold: 700;
+
+    /* Shadows */
+
+    --shadow-light: hsla(0, 0%, 0%, 0.149);
+    --shadow-medium: hsla(0, 0%, 0%, 0.302);
+
+}
+
+/* body */
+
+body {
+    max-width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+
+    background: repeating-radial-gradient(
+    circle at top center,
+    var(--bg-radial-gradient-1),
+    var(--bg-radial-gradient-2)
+  );
+}
+
+/* main */
+
+.container {
+    max-width: 44rem;
+    max-height: 100vh;
+    margin-inline: auto;
+}
+
+/* Header */
+
+.header {
+    max-width: 100%;
+    border: 3px solid var(--Header-Outline);
+    border-radius: 1rem;
+    margin-inline: auto;
+    padding: 1rem 1.3rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.scoreboard {
+    background-color: var(--White);
+    padding: 0.8rem 2.7rem;
+    border-radius: 0.5rem;
+}
+
+.score-text {
+    font-size: 1rem;
+    color: var(--Score-Text);
+    letter-spacing: 0.15rem;
+}
+
+#score-value {
+    font-size: 3.9rem;
+    line-height: 4rem;
+    color: hsla(228, 25%, 31%, 0.854);
+    text-align: center;
+}
+
+/* Game start */
+
+.game-start {
+    max-width: 35rem;
+    height: 32rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+        "paper scissors"
+        "rock rock";
+    place-items: center;
+    padding-top: 4rem;
+    position: relative;
+}
+
+.game-start::before {
+    content: "";
+    position: absolute;
+    top: 33%;
+    left: 22.5%;
+    width: 100%;
+    height: 100%;
+    background-image: url(images/bg-triangle.svg);
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.choice-btn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.choice {
+    width: 9.5rem;
+    height: 9.5rem;
+    background: var(--White);
+    border-radius: 50%;
+    box-shadow: 0 0.5rem var(--shadow-light) inset;;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    position: relative;
+    user-select: none;
+    position: relative;
+}
+
+.choice-btn[data-choice="paper"] {
+    grid-area: paper;
+}
+
+.choice-btn[data-choice="scissors"] {
+    grid-area: scissors;
+}
+
+.choice-btn[data-choice="rock"] {
+    grid-area: rock;
+}
+
+.choice-img {
+    width: 45%;
+}
+
+.choice::before,
+.choice::after {
+    content: "";
+    position: absolute;
+    top: -15%;
+    right: -15%;
+    width: 130%;
+    height: 130%;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.choice::after {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.choice:hover::after,
+.choice:focus::after {
+    opacity: 1;
+    box-shadow: 0 0 0 2rem hsl(218, 41%, 23%);
+    z-index: -2;
+}
+
+.choice.paper::before {
+    background: linear-gradient(to bottom, var(--rock_gradient_1), var(--rock_gradient_2));
+    box-shadow: 0 0.5rem var(--shadow-medium), 0 0.5rem var(--rock_gradient_1);
+}
+
+
+.choice.scissors::before {
+    background: linear-gradient(to bottom, var(--paper_gradient_1), var(--paper_gradient_2));
+    box-shadow: 0 0.5rem var(--shadow-medium) ,0 0.5rem var(--paper_gradient_1);
+}
+
+.choice.rock::before {
+    background: linear-gradient(to bottom, var(--scissor_gradient_1), var(--scissor_gradient_2));
+    box-shadow: 0 0.5rem var(--shadow-medium), 0 0.5rem var(--scissor_gradient_1);
+}
+
+
+/* rules button */
+
+.rules-btn {
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    font-weight: var(--Semibold);
+    color: var(--White);
+    background: transparent;
+    border: 0.125rem solid var(--Header-Outline);
+    border-radius: 0.5rem;
+    outline: none;
+    padding: 0.7rem 1.5rem;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 2rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.rules-btn:focus {
+    border: 0.125rem solid var(--White);
+}
+
+/* Rules modal */
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    background-color: var(--shadow-medium);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    user-select: none;
+}
+
+.modal-container {
+    background-color: var(--White);
+    border-radius: 0.5rem;
+    padding: 2rem 2rem 1.7rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h1 {
+    color: var(--Dark-Text);
+    font-weight: var(--bold);
+}
+
+#modal-close-btn {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+#modal-close-btn:focus {
+    transform: scale(120%);
+}
+
+.modal-container img {
+    transform: scale(90%);
+}
+
+/* To show rules modal */
+
+.show-modal {
+    opacity: 1;
+    pointer-events: initial;
+}
+
+/* Game Results */
+
+.results {
+    max-width: 62.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+    grid-template-areas: 
+        "you-title house-title"
+        "you-choice house-choice";
+    margin-inline: auto;
+}
+
+.results-heading:first-of-type {
+    grid-area: you-title;
+}
+
+.results-heading:last-of-type {
+    grid-area: house-title;
+}
+
+.choice-result:first-of-type {
+    grid-area: you-choice;
+}
+
+.choice-result:last-of-type {
+    grid-area: house-choice;
+}
+
+/* Choices result display */
+
+.results-heading {
+    font-size: 1.3rem;
+    font-weight: var(--bold);
+    letter-spacing: 0.2rem;
+    color: white;
+    padding: 4rem 0 8rem;
+    user-select: none;
+}
+
+.choice-result {
+    min-width: 9.5rem;
+    min-height: 9.5rem;
+    background-color: hsl(223, 47%, 16%);
+    border-radius: 50%;
+    transform: scale(140%);
+    z-index: -1;
+}
+
+
+/* Winner Result */
+
+.results.show-winner {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+        "you-title . house-title"
+        "you-choice result-winner house-choice";
+}
+
+.results-winner {
+    grid-area: result-winner;
+    display: grid;
+    place-items: center;
+}
+
+.winner .choice::after {
+    box-shadow: 0 0 0 40px #293251, 0 0 0 80px #232c4b, 0 0 0 130px #1e2949;
+    animation: winner 1s ease forwards;
+}
+
+@keyframes winner {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.result-text {
+    font-size: 3.2rem;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.1rem;
+    z-index: inherit;
+    margin-bottom: 1rem;
+}
+
+#playAgainBtn {
+    width: 12rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    color: var(--rock_gradient_1);
+    padding: 1rem 0;
+    border: 0.2rem solid transparent;
+    border-radius: 0.5rem;
+    outline: none;
+    z-index: inherit;
+    cursor: pointer;
+}
+
+#playAgainBtn:focus {
+    border: 0.2rem solid var(--Header-Outline);
+}
+
+
+
+/* footer */
+
+.attribution { 
+    font-size: 11px; 
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    color: var(--Header-Outline);
+}
+
+.attribution a { 
+    color: hsl(228, 45%, 44%); 
+}
+
+/* Utilities */
+
+.hidden {
+    display: none;
+}
